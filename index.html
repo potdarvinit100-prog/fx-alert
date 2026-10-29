@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FX Alert — Live Currency Converter &amp; Rate Alerts</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>FX Alert</h1>
+  <p>Live currency conversion with an India focus: convert between USD, EUR, GBP and INR at current reference rates, and set a rate alert that fires here when a pair crosses your target.</p>
+</header>
+<main>
+  <p class="status" id="status">Loading live data…</p>
+  <div class="error" id="error" hidden></div>
+  <div class="alerts" id="alerts" hidden></div>
+
+  <section class="panel">
+    <h2>Converter</h2>
+    <div class="converter">
+      <label for="amount">Amount</label>
+      <input id="amount" type="number" min="0" step="any" value="100">
+      <label for="fromCur">From</label>
+      <select id="fromCur">
+        <option value="USD">USD — US Dollar</option>
+        <option value="EUR">EUR — Euro</option>
+        <option value="GBP">GBP — British Pound</option>
+        <option value="INR" selected>INR — Indian Rupee</option>
+      </select>
+      <label for="toCur">To</label>
+      <select id="toCur">
+        <option value="USD">USD — US Dollar</option>
+        <option value="EUR">EUR — Euro</option>
+        <option value="GBP">GBP — British Pound</option>
+        <option value="INR" selected>INR — Indian Rupee</option>
+      </select>
+      <button id="convert" type="button">Convert</button>
+    </div>
+    <p class="result" id="result"></p>
+    <p class="rates" id="rates"></p>
+  </section>
+
+  <section class="panel">
+    <h2>Rate alert (checked on every refresh)</h2>
+    <p>Alerts live only in this browser. They are checked when rates refresh, not tick by tick.</p>
+    <div class="alert-form">
+      <label for="alertFrom">From</label>
+      <select id="alertFrom">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="INR">INR</option>
+      </select>
+      <label for="alertTo">To</label>
+      <select id="alertTo">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="INR" selected>INR</option>
+      </select>
+      <label for="alertDirection">Alert when 1 unit of From buys</label>
+      <select id="alertDirection">
+        <option value="above">More than</option>
+        <option value="below">Less than</option>
+      </select>
+      <label for="alertTarget">Target rate</label>
+      <input id="alertTarget" type="number" min="0" step="any" placeholder="e.g. 96">
+      <button id="setAlert" type="button">Set alert</button>
+      <button id="clearAlerts" type="button">Clear triggered alerts</button>
+    </div>
+    <ul id="alertList"></ul>
+  </section>
+
+  <footer>
+    <p>Data: <a href="https://www.frankfurter.dev/" target="_blank" rel="noopener">Frankfurter</a> (ECB reference rates), no key. AED is not offered: Frankfurter's ECB-based list does not include it, so this app covers USD, EUR, GBP and INR only. Auto-refreshes every 10 minutes. <button id="refresh" type="button">Refresh now</button></p>
+    <p id="sourceLine"></p>
+  </footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
